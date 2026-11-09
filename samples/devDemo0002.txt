@@ -1,0 +1,11 @@
+Idempotent job queues are easier than they sound. An idempotent job produces the same result no matter how many times it runs.
+
+The first rule is to attach a unique key to every job, so that enqueueing the same work twice creates only one job. We recommend always deriving the key from the business event, for example the order id and the step name.
+
+The second rule is retries with exponential backoff. Wait a little after the first failure, twice as long after the second, and stop after a fixed number of attempts so that broken jobs do not loop forever.
+
+Acme Queue costs 20 dollars per month for the team plan, which is cheap compared with the cost of one lost order.
+
+You should also recover stale locks. If a worker dies while holding a job, the job must return to the queue after a timeout instead of waiting forever.
+
+For instance, in our demo store a payment capture job crashed halfway, and the dedupe key let us safely run it again without charging the customer twice.

@@ -1,0 +1,27 @@
+1
+00:00:00,000 --> 00:00:06,000
+Today we talk about a modular monolith and why small teams often start there instead of splitting into services.
+
+2
+00:00:06,000 --> 00:00:14,000
+A module boundary is a rule about who may call whom, and you should enforce it with tests rather than good intentions.
+
+3
+00:00:14,000 --> 00:00:22,000
+For example, in our demo shop the billing module never imports the catalog module directly and only talks through a small interface.
+
+4
+00:00:22,000 --> 00:00:30,000
+You should keep background work in a queue so web requests stay fast, and Acme Queue 2.0 processes up to 5000 jobs per second per node.
+
+5
+00:00:30,000 --> 00:00:38,000
+Make sure every job has a dedupe key because retries will happen and duplicate work is the most common production bug.
+
+6
+00:00:38,000 --> 00:00:46,000
+Start with one database and one deployable, and extract a service only when a module has a different scaling or ownership need.
+
+7
+00:00:46,000 --> 00:00:54,000
+Architecture is the set of decisions that are expensive to change later, so write them down and review them often.

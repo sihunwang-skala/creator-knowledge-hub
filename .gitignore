@@ -1,0 +1,29 @@
+# secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+# data (user libraries are private, never commit)
+data/
+*.db
+*.sqlite3
+# transcripts / copyrighted material must never be committed
+transcripts/
+private-samples/
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+# node
+node_modules/
+frontend/dist/
+# os / editor
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,11 @@
+Pricing a developer tool starts with who pays. If the buyer is the team lead, price per seat; if the buyer is the company, price per workspace.
+
+Acme Queue costs 20 dollars per month for the team plan, and that is a good example of a simple flat price that is easy to explain.
+
+According to our survey, 40 percent of developers prefer usage based pricing, but a flat price converts better for small teams.
+
+You should start with a flat price, talk to ten customers, and only then add usage tiers. Avoid discounts in the first month because they hide the real signal.
+
+Monetization is the process of turning product value into revenue, and it is different from marketing.
+
+Make sure the free plan has a clear limit so users understand when they should upgrade.
