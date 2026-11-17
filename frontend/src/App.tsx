@@ -11,6 +11,7 @@ import Topics from "./pages/Topics";
 import CrossCheck from "./pages/CrossCheck";
 import DigestPage from "./pages/Digest";
 import Settings from "./pages/Settings";
+import { getLanguage, setLanguage, useUiTranslation, type Language } from "./i18n";
 
 const NAV = [
   ["#/", "Home Feed"], ["#/creators", "My Creators"], ["#/add", "Quick Add"], ["#/library", "Library"],
@@ -47,13 +48,25 @@ export default function App() {
   const [authed, setAuthed] = useState(!!getToken());
   const [dark, setDark] = useState(document.documentElement.classList.contains("dark"));
   const [menu, setMenu] = useState(false);
+  const [language] = useState<Language>(getLanguage);
+  useUiTranslation(language);
 
   const loadMe = () => api<Me>("/me").then(setMe).catch(() => { setToken(""); setAuthed(false); });
   useEffect(() => { if (authed) loadMe(); }, [authed]);
   useEffect(() => { document.documentElement.classList.toggle("dark", dark); try { localStorage.setItem("ckh-theme", dark ? "dark" : "light"); } catch { /* ignore */ } }, [dark]);
   useEffect(() => { setMenu(false); window.scrollTo(0, 0); }, [hash]);
 
-  if (!authed) return <Onboarding onDone={() => setAuthed(true)} />;
+  const languageSelect = (
+    <label className="flex items-center gap-2 text-xs">
+      <span>{language === "ko" ? "언어" : "Language"}</span>
+      <select aria-label={language === "ko" ? "언어 선택" : "Select language"} className="input !w-auto !py-1 text-xs" value={language} onChange={(e) => setLanguage(e.target.value as Language)}>
+        <option value="ko">한국어</option>
+        <option value="en">English</option>
+      </select>
+    </label>
+  );
+
+  if (!authed) return <><div className="mx-auto flex max-w-md justify-end px-6 pt-4">{languageSelect}</div><Onboarding onDone={() => setAuthed(true)} /></>;
 
   const [, path = "", arg = ""] = hash.replace(/^#\//, "/").split("/");
   let page;
@@ -88,6 +101,7 @@ export default function App() {
         <div className="mt-4 border-t border-slate-200 pt-3 text-xs text-slate-500 dark:border-slate-800">
           {me?.demo_mode && <p className="mb-2 rounded bg-amber-50 p-2 text-amber-900 dark:bg-amber-950 dark:text-amber-200">Demo mode: synthetic YouTube data (no API key set).</p>}
           <p>Signed in as {me?.name}</p>
+          <div className="mt-2">{languageSelect}</div>
           <button className="btn mt-2 w-full" onClick={() => setDark(!dark)} aria-pressed={dark}>{dark ? "Light mode" : "Dark mode"}</button>
         </div>
       </nav>
