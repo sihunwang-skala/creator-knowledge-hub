@@ -1,3 +1,5 @@
+**English** · [한국어](README.ko.md)
+
 # Creator Knowledge Hub
 
 A private, permission-aware knowledge library for the YouTube creators **you** choose. Follow creators, get new uploads in a feed, attach a transcript you are allowed to use, get independent AI notes, search them later, cross-check factual claims, merge several videos into one briefing, and receive a digest.
